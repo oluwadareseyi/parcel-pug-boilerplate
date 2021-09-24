@@ -1,7 +1,21 @@
-.c-home {
-  h1 {
-    @include media(">tablet") {
-      font-size: 3em;
-    }
+.home {
+  @extend %cover;
+  @extend %page;
+
+  overflow: hidden;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+
+  &--active {
+    @extend %page--active;
   }
+
+  // &:after {
+  //   background: #f0f;
+  //   content: '';
+  //   height: 100%;
+  //   left: 50%;
+  //   position: absolute;
+  //   transform: translateX(-50%);
+  //   width: 1.5rem;
+  // }
 }
