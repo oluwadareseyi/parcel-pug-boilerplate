@@ -1,5 +1,6 @@
 import AutoBind from "auto-bind";
 import each from "lodash/each";
+import Detection from "./classes/Detection";
 
 import Case from "./pages/Case";
 import Home from "./pages/Home";
@@ -8,6 +9,11 @@ class App {
     AutoBind(this);
 
     this.url = window.location.pathname;
+
+    this.mouse = {
+      x: window.innerWidth / 2,
+      y: window.innerHeight / 2,
+    };
 
     this.createCase();
     this.createHome();
@@ -98,6 +104,45 @@ class App {
     });
   }
 
+  onTouchDown(event) {
+    event.stopPropagation();
+
+    if (!Detection.isMobile() && event.target.tagName === "A") return;
+
+    this.mouse.x = event.touches ? event.touches[0].clientX : event.clientX;
+    this.mouse.y = event.touches ? event.touches[0].clientY : event.clientY;
+
+    if (this.page && this.page.onTouchDown) {
+      this.page.onTouchDown(event);
+    }
+  }
+
+  onTouchMove(event) {
+    event.stopPropagation();
+
+    this.mouse.x = event.touches ? event.touches[0].clientX : event.clientX;
+    this.mouse.y = event.touches ? event.touches[0].clientY : event.clientY;
+
+    if (this.page && this.page.onTouchMove) {
+      this.page.onTouchMove(event);
+    }
+  }
+
+  onTouchUp(event) {
+    event.stopPropagation();
+
+    this.mouse.x = event.changedTouches
+      ? event.changedTouches[0].clientX
+      : event.clientX;
+    this.mouse.y = event.changedTouches
+      ? event.changedTouches[0].clientY
+      : event.clientY;
+
+    if (this.page && this.page.onTouchUp) {
+      this.page.onTouchUp(event);
+    }
+  }
+
   /**
    * Loop
    */
@@ -142,6 +187,14 @@ class App {
 
     window.addEventListener("mousewheel", this.onWheel, { passive: true });
     window.addEventListener("wheel", this.onWheel, { passive: true });
+
+    window.addEventListener("mousedown", this.onTouchDown, { passive: true });
+    window.addEventListener("mousemove", this.onTouchMove, { passive: true });
+    window.addEventListener("mouseup", this.onTouchUp, { passive: true });
+
+    window.addEventListener("touchstart", this.onTouchDown, { passive: true });
+    window.addEventListener("touchmove", this.onTouchMove, { passive: true });
+    window.addEventListener("touchend", this.onTouchUp, { passive: true });
   }
 }
 

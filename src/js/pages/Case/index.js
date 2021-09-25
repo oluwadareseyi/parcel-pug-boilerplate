@@ -1,4 +1,4 @@
-import Page from "../../components/Page";
+import Page from "../../classes/Page";
 import { delay } from "../../utils/math";
 
 export default class extends Page {

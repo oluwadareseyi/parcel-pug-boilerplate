@@ -33,8 +33,13 @@ body {
   width: 100%;
 }
 
-* {
+*,
+*:before,
+*:after {
+  user-select: none;
   box-sizing: border-box;
+  outline: none;
+  -webkit-touch-callout: none;
 }
 
 a {

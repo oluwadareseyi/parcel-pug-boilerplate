@@ -90,6 +90,30 @@ export default class Page {
     this.scroll.target += speed;
   }
 
+  onTouchDown(event) {
+    this.isDown = true;
+
+    this.scroll.position = this.scroll.current;
+    this.start = event.touches ? event.touches[0].clientY : event.clientY;
+  }
+
+  onTouchMove(event) {
+    if (!this.isDown) return;
+
+    const y = event.touches ? event.touches[0].clientY : event.clientY;
+    const distance = (this.start - y) * 2;
+
+    this.scroll.target = this.scroll.position + distance;
+  }
+
+  onTouchUp(event) {
+    this.isDown = false;
+  }
+
+  /**
+   * Update
+   */
+
   update() {
     this.scroll.target = clamp(0, this.scroll.limit, this.scroll.target);
 
