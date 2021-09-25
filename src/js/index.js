@@ -3,7 +3,6 @@ import each from "lodash/each";
 
 import Case from "./pages/Case";
 import Home from "./pages/Home";
-
 class App {
   constructor() {
     AutoBind(this);
@@ -27,7 +26,11 @@ class App {
 
     this.page.show(this.url);
 
+    this.addEventListeners();
     this.addLinksEventsListeners();
+    this.update();
+
+    this.onResize();
   }
 
   createHome() {
@@ -68,6 +71,47 @@ class App {
     this.isFetching = false;
   }
 
+  /**
+   * Events
+   */
+
+  onResize() {
+    if (this.home) {
+      this.home.onResize();
+    }
+
+    if (this.case) {
+      this.case.onResize();
+    }
+  }
+
+  onWheel(event) {
+    if (this.page && this.page.onWheel) {
+      this.page.onWheel(event);
+    }
+  }
+
+  onPopState() {
+    this.onChange({
+      url: window.location.pathname,
+      push: false,
+    });
+  }
+
+  /**
+   * Loop
+   */
+  update() {
+    if (this.page) {
+      this.page.update();
+    }
+
+    window.requestAnimationFrame(this.update);
+  }
+
+  /**
+   * Listeners
+   */
   addLinksEventsListeners() {
     const links = document.querySelectorAll("a");
 
@@ -90,6 +134,14 @@ class App {
         link.target = "_blank";
       }
     });
+  }
+
+  addEventListeners() {
+    window.addEventListener("resize", this.onResize, { passive: true });
+    window.addEventListener("popstate", this.onPopState, { passive: true });
+
+    window.addEventListener("mousewheel", this.onWheel, { passive: true });
+    window.addEventListener("wheel", this.onWheel, { passive: true });
   }
 }
 

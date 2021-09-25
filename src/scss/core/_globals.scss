@@ -1,9 +1,17 @@
 html {
+  box-sizing: border-box;
   font-size: calc(100vw / 1920 * 10);
-}
+  height: 100%;
+  left: 0;
+  overflow: hidden;
+  overscroll-behavior: none;
+  position: fixed;
+  -moz-osx-font-smoothing: grayscale;
+  top: 0;
+  -webkit-font-smoothing: antialiased;
+  width: 100%;
 
-@media (max-width: 767px) {
-  html {
+  @include media("<=phone") {
     font-size: calc(100vw / 375 * 10);
   }
 }
@@ -15,10 +23,14 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, Roboto, Oxygen, Ubuntu,
     Cantarell, Fira Sans, Droid Sans, Helvetica Neue, Segoe UI, sans-serif;
   font-size: 16px;
-
-  @include media("<=1024px") {
-    font-size: 15px;
-  }
+  height: 100%;
+  left: 0;
+  opacity: 1;
+  overflow: hidden;
+  overscroll-behavior: none;
+  position: fixed;
+  top: 0;
+  width: 100%;
 }
 
 * {
