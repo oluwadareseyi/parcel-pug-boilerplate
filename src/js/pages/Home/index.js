@@ -9,9 +9,7 @@ export default class extends Page {
       },
       element: ".home",
       elements: {
-        list: ".home__list",
-        wrapper: ".home__list",
-        items: ".home__item",
+        wrapper: ".home__wrapper",
       },
     });
   }
@@ -34,5 +32,7 @@ export default class extends Page {
     super.onResize();
   }
 
-  update() {}
+  update() {
+    super.update();
+  }
 }

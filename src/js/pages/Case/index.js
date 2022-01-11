@@ -9,11 +9,6 @@ export default class extends Page {
         caseActive: "case--active",
         mediaActive: "case__gallery__media__placeholder--active",
       },
-      element: ".home",
-      elements: {
-        list: ".home__list",
-        items: ".home__item",
-      },
       element: ".cases",
       elements: {
         wrapper: "#trolli",

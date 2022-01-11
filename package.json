@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "license": "MIT",
   "scripts": {
-    "dev": "rm -rf .parcel-cache && parcel src/index.pug --open -p 3000",
+    "dev": "rm -rf .parcel-cache && parcel src/index.pug -p 3000",
     "build": "parcel build src/index.pug --public-url ./"
   },
   "keywords": [],
