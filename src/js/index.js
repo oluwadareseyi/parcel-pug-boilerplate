@@ -1,9 +1,12 @@
 import AutoBind from "auto-bind";
 import each from "lodash/each";
 import Detection from "./classes/Detection";
+import Preloader from "./components/Preloader";
 
-import Case from "./pages/Case";
+// import Case from "./pages/Case";
 import Home from "./pages/Home";
+import About from "./pages/About";
+
 class App {
   constructor() {
     AutoBind(this);
@@ -15,12 +18,13 @@ class App {
       y: window.innerHeight / 2,
     };
 
-    this.createCase();
-    this.createHome();
+    this.createPreloader();
+    // this.createCase();
+    // this.createHome();
 
     this.pages = {
-      "/": this.home,
-      "/case": this.case,
+      "/": new Home(),
+      "/about": new About(),
     };
 
     if (this.url.indexOf("/case") > -1) {
@@ -39,13 +43,24 @@ class App {
     this.onResize();
   }
 
-  createHome() {
-    this.home = new Home();
+  createPreloader() {
+    this.preloader = new Preloader();
+
+    this.preloader.once("completed", this.onPreloaded.bind(this));
   }
 
-  createCase() {
-    this.case = new Case();
+  onPreloaded() {
+    this.onResize();
+    this.page.show();
   }
+
+  // createHome() {
+  //   this.home = new Home();
+  // }
+
+  // createCase() {
+  //   this.case = new Case();
+  // }
 
   async onChange({ push = true, url = null }) {
     url = url.replace(window.location.origin, "");
@@ -72,6 +87,7 @@ class App {
       this.page = this.pages[this.url];
     }
 
+    this.onResize();
     await this.page.show(this.url);
 
     this.isFetching = false;
@@ -82,12 +98,8 @@ class App {
    */
 
   onResize() {
-    if (this.home) {
-      this.home.onResize();
-    }
-
-    if (this.case) {
-      this.case.onResize();
+    if (this.page) {
+      this.page.onResize();
     }
   }
 

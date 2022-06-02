@@ -1,0 +1,19 @@
+.about {
+  @extend %cover;
+  @extend %page;
+
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+
+  &--active {
+    @extend %page--active;
+  }
+}
+
+.about__wrapper {
+  @extend %cover;
+  height: auto;
+
+  &__inner {
+    height: 200vh;
+  }
+}

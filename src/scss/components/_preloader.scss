@@ -1,0 +1,76 @@
+.preloader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: z("preloader");
+  padding: 40px;
+  padding-left: 4rem;
+  padding-right: 4rem;
+  display: flex;
+
+  @include media("<=tablet") {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  &__wrapper {
+    margin-top: auto;
+    width: 100%;
+  }
+
+  &__name {
+    font-size: 20.2rem;
+    font-weight: 700;
+    letter-spacing: calc(-0.05 * 20.2rem);
+    margin-bottom: 8px;
+    color: #262623;
+
+    @include media("<=tablet") {
+      font-size: 10rem;
+      letter-spacing: calc(-0.05 * 10rem);
+    }
+
+    @include media("<=phone") {
+      font-size: 4.5rem;
+      letter-spacing: calc(-0.05 * 4.5rem);
+    }
+  }
+
+  &__bottom {
+    display: flex;
+    font-size: 32px;
+    letter-spacing: calc(-0.05 * 32px);
+    color: #262623;
+    line-height: 1;
+
+    @include media("<=tablet") {
+      font-size: 24px;
+    }
+  }
+  &__desc {
+    max-width: 91.7rem;
+    width: 100%;
+    flex-shrink: 0;
+  }
+
+  &__number {
+    display: inline-block;
+    @include media("<=tablet") {
+      margin-left: 0;
+    }
+    &__wrapper {
+      width: 100%;
+
+      @include media("<=tablet") {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        max-width: calc(100% - 48px);
+        margin: 0 auto;
+      }
+    }
+  }
+}
