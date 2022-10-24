@@ -4,7 +4,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "rm -rf .parcel-cache && parcel src/index.pug -p 3000",
-    "build": "parcel build src/index.pug --public-url ./"
+    "build": "parcel build src/index.pug"
   },
   "keywords": [],
   "author": "",
