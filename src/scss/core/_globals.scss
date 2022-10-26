@@ -7,8 +7,8 @@ html {
   overscroll-behavior: none;
   position: fixed;
   -moz-osx-font-smoothing: grayscale;
-  top: 0;
   -webkit-font-smoothing: antialiased;
+  top: 0;
   width: 100%;
 
   @include media("<=phone") {
